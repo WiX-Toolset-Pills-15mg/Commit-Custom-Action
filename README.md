@@ -26,6 +26,10 @@ The pill demonstrates how to create a commit custom action used together with th
 - [doc/logs](doc/logs)
 - Sometimes a quick look into the log files may be useful, but running the installer each time is cumbersome. I generated the log files for what I thought are the meaningful scenarios and I placed them into this directory. Have a look when needed.
 
+## Suggestions
+
+Any suggestion or opinion is appreciated. Please, feel free to add a [GitHub Issue](https://github.com/WiX-Toolset-Pills-15mg/Commit-Custom-Action/issues/new?assignees=&labels=&template=feature_request.md&title=).
+
 ## Donations
 
 > If you like my work and want to support me, you can buy me a coffee:
