@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "CommitCustomAction", "CommitCustomAction\CommitCustomAction.wixproj", "{D7979E53-96AD-41E2-B753-3CB2AD28AA26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommitCustomAction.CustomActions", "CommitCustomAction.CustomActions\CommitCustomAction.CustomActions.csproj", "{0FB0D8CC-AC22-4985-8257-6218C8F4FB61}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7979E53-96AD-41E2-B753-3CB2AD28AA26}.Debug|x86.ActiveCfg = Debug|x86
+		{D7979E53-96AD-41E2-B753-3CB2AD28AA26}.Debug|x86.Build.0 = Debug|x86
+		{D7979E53-96AD-41E2-B753-3CB2AD28AA26}.Release|x86.ActiveCfg = Release|x86
+		{D7979E53-96AD-41E2-B753-3CB2AD28AA26}.Release|x86.Build.0 = Release|x86
+		{0FB0D8CC-AC22-4985-8257-6218C8F4FB61}.Debug|x86.ActiveCfg = Debug|x86
+		{0FB0D8CC-AC22-4985-8257-6218C8F4FB61}.Debug|x86.Build.0 = Debug|x86
+		{0FB0D8CC-AC22-4985-8257-6218C8F4FB61}.Release|x86.ActiveCfg = Release|x86
+		{0FB0D8CC-AC22-4985-8257-6218C8F4FB61}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D4AEBA4F-DEB2-4735-B4F7-53A222B8651B}
+	EndGlobalSection
+EndGlobal

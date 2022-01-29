@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+
+        <Binary
+            Id="CustomActionsBinary"
+            SourceFile="$(var.CommitCustomAction.CustomActions.TargetDir)$(var.CommitCustomAction.CustomActions.TargetName).CA.dll" />
+
+        <!--
+        ====================================================================================================
+        Step 2: Create the deferred custom action
+        ====================================================================================================
+        
+        This custom action will add a message txt in the file pointed by FILE_PATH property.
+        
+        Being a deferred custom action we must create a second custom action for the data that needs to be
+        passed to the deferred one.
+        
+        Note: This second custom action creates a property with the same name as the deferred custom action
+              and the value containing key-value pair items separated by semicolon.
+              For more details see the Deferred Custom Action pill:
+              - https://github.com/WiX-Toolset-Pills-15mg/Deferred-Custom-Action
+        
+        NEXT: CustomActions.wxs (DOWN)
+        -->
+
+        <CustomAction
+            Id="AddMessageToFile_SetData"
+            Property="AddMessageToFile"
+            Value="FilePath=[FILE_PATH]" />
+
+        <CustomAction
+            Id="AddMessageToFile"
+            BinaryKey="CustomActionsBinary"
+            DllEntry="AddMessageToFile"
+            Execute="deferred" />
+
+        <!--
+        ====================================================================================================
+        Step 3: Create the rollback custom action
+        ====================================================================================================
+        
+        This custom action will be executed in case an error occurs in the deferred custom action or in any
+        subsequent actions.
+        
+        Same as for the deferred custom action, we must provide a second custom action that sets the data
+        to be passed to the rollback custom action.
+        
+        NEXT: CustomActions.wxs (DOWN)
+        -->
+
+        <CustomAction
+            Id="RollbackAddMessageToFile_SetData"
+            Property="RollbackAddMessageToFile"
+            Value="FilePath=[FILE_PATH]" />
+
+        <CustomAction
+            Id="RollbackAddMessageToFile"
+            BinaryKey="CustomActionsBinary"
+            DllEntry="RollbackAddMessageToFile"
+            Execute="rollback" />
+
+        <!--
+        ====================================================================================================
+        Step 4: Create the commit custom action
+        ====================================================================================================
+        
+        This custom action will be executed at the end of the installation, in case of success, to cleanup
+        any temporary data that may have been created during the installation.
+        
+        Same as for the deferred and rollback custom actions, we must provide a second custom action that
+        sets the data to be passed to the commit custom action.
+        
+        NEXT: Product.wxs
+        -->
+
+        <CustomAction
+            Id="CommitAddMessageToFile_SetData"
+            Property="CommitAddMessageToFile"
+            Value="FilePath=[FILE_PATH]" />
+
+        <CustomAction
+            Id="CommitAddMessageToFile"
+            BinaryKey="CustomActionsBinary"
+            DllEntry="CommitAddMessageToFile"
+            Execute="commit" />
+
+    </Fragment>
+</Wix>

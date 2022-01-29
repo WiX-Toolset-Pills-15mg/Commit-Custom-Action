@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+WiX Toolset Pills 15mg
+Copyright (C) 2019-2021 Dust in the Wind
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!--
+====================================================================================================
+START: Overview
+====================================================================================================
+
+Let's consider the following scenario.
+
+We have to create an installer that, besides deploying its files, it must also update an already
+existing file from the computer.
+
+Note: The path to that existing file will be received from the command line.
+
+Now, let's get back to our installer. It is requested to add, into the existing file, a line
+containing a timestamp and a text message. But, it is very important the message to be added into
+the file only if current installation is successful.
+
+What should we do if we have a subsequent step, a custom action for example, that fails?
+Of course, an associated rollback custom action comes in handy here. And the scenario is like this:
+
+    - The deferred custom action will make a temporary backup of the file before updating the
+      original file;
+
+    - If an error happens later, the rollback custom action will be executed and it will move the
+      backup file back to replace the modified file. In this case, no backup file remains on the
+      disk after the execution finishes.
+
+But, what if no error happens? Who will remove that temporary backup file?
+In this case, a commit custom action will save the day.
+
+Let's see how.
+
+NEXT: Product.wxs (DOWN)
+-->
+
+<Wix
+    xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+    <Product
+        Id="*"
+        Name="Commit Custom Action - Wix Toolset Pill"
+        Language="1033"
+        Version="1.0.0.0"
+        Manufacturer="Dust in the Wind"
+        UpgradeCode="20bdc255-ecae-478c-9663-1c58e9449e95">
+
+        <Package
+            InstallerVersion="200"
+            Compressed="yes"
+            InstallScope="perMachine" />
+
+        <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+        <MediaTemplate />
+
+        <!--
+        ====================================================================================================
+        Step 1: Add the FILE_PATH property
+        ====================================================================================================
+
+        This public property will contain the path to the file that needs to be updated during the
+        installation.
+
+        NEXT: CustomActions.wxs
+        -->
+
+        <Property Id="FILE_PATH" />
+
+        <Feature
+            Id="ProductFeature"
+            Title="Commit Custom Action"
+            Level="1">
+
+            <ComponentGroupRef Id="FileComponents" />
+        </Feature>
+
+        <!--
+        ====================================================================================================
+        Step 6: Import custom action to simulate a failure
+        ====================================================================================================
+
+        Include the WixFailWhenDeferred custom action from the WixUtilExtension.dll to help us in simulating
+        a failure during the installation.
+
+        See the Planned-Failure pill for more details:
+            - https://github.com/WiX-Toolset-Pills-15mg/Planned-Failure/blob/master/doc/article/README.md
+
+        NEXT: install-with-error.bat
+        -->
+
+        <CustomActionRef Id="WixFailWhenDeferred" />
+
+        <!--
+        ====================================================================================================
+        Step 5: Add the custom actions into the sequence
+        ====================================================================================================
+
+        In order to correctly schedule the custom actions we must respect the following rules:
+        
+            - Each "[name]_SetData" custom action must be sequenced just before its main custom action.
+            
+            - The rollback custom action must be sequenced before its main custom action.
+              This is necessary because it must be already present into the rollback list in case the main
+              custom action fails.
+              
+            - The commit custom action, on the other hand, must pe sequenced after its main custom action.
+              This is necessary because it must be added into the commit list and executed only if its main
+              custom action is successfully executed.
+
+        Note that all the custom actions are sequenced to run only when the product is being installed. On
+        any other scenario (uninstall, repair) they are not needed. Also, no FILE_PATH argument is expected
+        to be provided from the command line.
+
+        NEXT: Product.wxs (UP)
+        -->
+
+        <InstallExecuteSequence>
+            <Custom Action="RollbackAddMessageToFile_SetData" Before="RollbackAddMessageToFile">NOT Installed</Custom>
+            <Custom Action="RollbackAddMessageToFile" Before="AddMessageToFile">NOT Installed</Custom>
+
+            <Custom Action="AddMessageToFile_SetData" Before="AddMessageToFile">NOT Installed</Custom>
+            <Custom Action="AddMessageToFile" After="InstallFiles">NOT Installed</Custom>
+
+            <Custom Action="CommitAddMessageToFile_SetData" Before="CommitAddMessageToFile">NOT Installed</Custom>
+            <Custom Action="CommitAddMessageToFile" After="AddMessageToFile">NOT Installed</Custom>
+        </InstallExecuteSequence>
+
+    </Product>
+
+</Wix>

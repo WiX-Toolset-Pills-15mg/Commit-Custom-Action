@@ -1,0 +1,10 @@
+﻿WiX Toolset Pills - Commit Custom Action
+====================================================================================================
+
+This file is part of the "Commit Custom Action" pill.
+
+The pill demonstrates how to create a commit custom action used together with the deferred and
+rollback custom actions.
+
+For more details please chech the GitHub repository:
+https://github.com/WiX-Toolset-Pills-15mg/Commit-Custom-Action
