@@ -15,11 +15,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using CommitCustomAction.CustomActions.Business;
-using CommitCustomAction.CustomActions.Utils;
+using DustInTheWind.CommitCustomAction.CustomActions.Business;
+using DustInTheWind.CommitCustomAction.CustomActions.Utils;
 using Microsoft.Deployment.WindowsInstaller;
 
-namespace CommitCustomAction.CustomActions
+namespace DustInTheWind.CommitCustomAction.CustomActions
 {
     public class RollbackAddMessageToFileCustomAction
     {

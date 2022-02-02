@@ -17,10 +17,10 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
-using CommitCustomAction.CustomActions.Business;
+using DustInTheWind.CommitCustomAction.CustomActions.Business;
 using Microsoft.Deployment.WindowsInstaller;
 
-namespace CommitCustomAction.CustomActions.Utils
+namespace DustInTheWind.CommitCustomAction.CustomActions.Utils
 {
     internal class CustomActionExecution
     {

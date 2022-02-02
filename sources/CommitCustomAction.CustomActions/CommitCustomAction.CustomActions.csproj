@@ -8,8 +8,8 @@
     <ProjectGuid>{0FB0D8CC-AC22-4985-8257-6218C8F4FB61}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CommitCustomAction.CustomActions</RootNamespace>
-    <AssemblyName>CommitCustomAction.CustomActions</AssemblyName>
+    <RootNamespace>DustInTheWind.CommitCustomAction.CustomActions</RootNamespace>
+    <AssemblyName>DustInTheWind.CommitCustomAction.CustomActions</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

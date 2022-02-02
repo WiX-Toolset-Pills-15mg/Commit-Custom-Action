@@ -16,7 +16,7 @@
 
 using System;
 
-namespace CommitCustomAction.CustomActions.Business
+namespace DustInTheWind.CommitCustomAction.CustomActions.Business
 {
     internal class WixToolsetPillWarningException : WixToolsetPillException
     {

@@ -17,7 +17,7 @@
 using System;
 using System.IO;
 
-namespace CommitCustomAction.CustomActions.Business
+namespace DustInTheWind.CommitCustomAction.CustomActions.Business
 {
     internal class ThatOneFile
     {
