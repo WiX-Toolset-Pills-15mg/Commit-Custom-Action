@@ -1,1 +1,1 @@
-msiexec /x CommitCustomAction.msi /l*v uninstall.log
+msiexec /x CommitCustomAction.msi /l*vx uninstall.log

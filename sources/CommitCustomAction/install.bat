@@ -1,5 +1,5 @@
 :: ====================================================================================================
-:: Step 6: Run the installer with error
+:: Step 8: Run the installer with error
 :: ====================================================================================================
 :: 
 :: Run the installer and look into the "install-with-error.log" file.
@@ -8,4 +8,4 @@
 :: 
 :: END
 
-msiexec /i CommitCustomAction.msi /l*v install.log FILE_PATH="c:\Temp\file.txt"
+msiexec /i CommitCustomAction.msi /l*vx install.log FILE_PATH="c:\Temp\file.txt"

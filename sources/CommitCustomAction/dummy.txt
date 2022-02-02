@@ -1,4 +1,4 @@
-﻿WiX Toolset Pills - Commit Custom Action
+﻿WiX Toolset Pills 15mg - Commit Custom Action
 ====================================================================================================
 
 This file is part of the "Commit Custom Action" pill.
